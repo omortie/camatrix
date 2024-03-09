@@ -50,7 +50,7 @@ class CameraViewState extends State<CameraView> {
     return Center(
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.width * 9.0 / 16.0,
         // Use [Video] widget to display video output.
         child: Video(controller: controller),
       ),
