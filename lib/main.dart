@@ -1,58 +1,78 @@
+import 'package:camatrix/camera_view.dart';
 import 'package:flutter/material.dart';
-
-// Make sure to add following packages to pubspec.yaml:
-// * media_kit
-// * media_kit_video
-// * media_kit_libs_video
 import 'package:media_kit/media_kit.dart'; // Provides [Player], [Media], [Playlist] etc.
-import 'package:media_kit_video/media_kit_video.dart'; // Provides [VideoController] & [Video] etc.
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Necessary initialization for package:media_kit.
-  MediaKit.ensureInitialized();
-  runApp(
-    const MaterialApp(
-      home: MyScreen(),
-    ),
-  );
+  try {
+    // Attempt MediaKit initialization
+    MediaKit.ensureInitialized();
+
+    // If successful, run the app
+    runApp(MyApp());
+  } catch (e) {
+    // Catch any errors during initialization
+    // Handle the error appropriately, e.g., log it or display a user-friendly message
+    print("Error initializing MediaKit: $e");
+    // You might choose to display an error message or exit the app here
+  }
 }
 
-class MyScreen extends StatefulWidget {
-  const MyScreen({Key? key}) : super(key: key);
-  @override
-  State<MyScreen> createState() => MyScreenState();
-}
-
-class MyScreenState extends State<MyScreen> {
-  // Create a [Player] to control playback.
-  late final player = Player();
-  // Create a [VideoController] to handle video output from [Player].
-  late final controller = VideoController(player);
-
-  @override
-  void initState() {
-    super.initState();
-    // Play a [Media] or [Playlist].
-    player.open(Media(
-        'rtsp://rtspstream:96d01209a52bb876d5c33853d6431f21@zephyr.rtsp.stream/movie'));
-  }
-
-  @override
-  void dispose() {
-    player.dispose();
-    super.dispose();
-  }
+class MyApp extends StatelessWidget {
+  // Sample rtsp list (it can be fetched from a backend server)
+  final List<String> rtspList = [
+    'rtsp://rtspstream:96d01209a52bb876d5c33853d6431f21@zephyr.rtsp.stream/movie',
+    'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+    'rtsp://rtspstream:96d01209a52bb876d5c33853d6431f21@zephyr.rtsp.stream/movie',
+    'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-        // Use [Video] widget to display video output.
-        child: Video(controller: controller),
+    return MaterialApp(
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
       ),
+      home: MyHomePage(
+        rtspList: rtspList,
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({required this.rtspList, super.key});
+
+  final List<String> rtspList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: null,
+        ),
+        title: const Text("Camatrix Dashboard"),
+      ),
+      body: Container(
+        color: Theme.of(context).colorScheme.primary,
+        child: GridView.count(
+          crossAxisCount: 3,
+          // Add spacing between grid items
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
+          // Define the widget builder for each grid item
+          children: rtspList.map((rtsp) => _buildCameraView(rtsp)).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCameraView(String url) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      child: CameraView(rtspURL: url),
     );
   }
 }
