@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
       title: "Camatrix",
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
       ),
       home: HomeWidget(),
     );

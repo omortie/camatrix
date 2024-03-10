@@ -14,7 +14,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.primaryContainer,
       child: GridView.count(
         crossAxisCount: 3,
         // Add spacing between grid items
