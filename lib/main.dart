@@ -12,7 +12,7 @@ void main() {
   } catch (e) {
     // Catch any errors during initialization
     // Handle the error appropriately, e.g., log it or display a user-friendly message
-    print("Error initializing MediaKit: $e");
+    debugPrint("Error initializing MediaKit: $e");
     // You might choose to display an error message or exit the app here
   }
 }

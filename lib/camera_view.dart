@@ -35,7 +35,7 @@ class CameraViewState extends State<CameraView> {
     );
 
     player.stream.error.listen((event) {
-      print('There is an error with player: $event');
+      debugPrint('There is an error with player: $event');
     });
   }
 
