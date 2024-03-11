@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:media_kit/media_kit.dart'; // Provides [Player], [Media], [Playlist] etc.
 import 'package:media_kit_video/media_kit_video.dart'; // Provides [VideoController] & [Video] etc.
+import 'package:logger/logger.dart';
 
 class CameraView extends StatefulWidget {
   const CameraView({required this.rtspURL, super.key});
@@ -25,6 +26,8 @@ class CameraViewState extends State<CameraView> {
   // Create a [VideoController] to handle video output from [Player].
   late final controller = VideoController(player);
 
+  var logger = Logger();
+
   @override
   void initState() {
     super.initState();
@@ -35,7 +38,7 @@ class CameraViewState extends State<CameraView> {
     );
 
     player.stream.error.listen((event) {
-      debugPrint('There is an error with player: $event');
+      logger.d('There is an error with player: $event');
     });
   }
 
