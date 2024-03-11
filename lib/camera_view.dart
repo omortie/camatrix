@@ -50,13 +50,19 @@ class CameraViewState extends State<CameraView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-        // Use [Video] widget to display video output.
-        child: Video(controller: controller),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double maxWidth = constraints.maxWidth;
+        final double maxHeight = maxWidth * 9.0 / 16.0;
+
+        return Center(
+          child: SizedBox(
+            width: maxWidth,
+            height: maxHeight,
+            child: Video(controller: controller),
+          ),
+        );
+      },
     );
   }
 }
