@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
       ),
-      home: HomeWidget(),
+      home: DefaultTabController(
+        length: 2,
+        child: HomeWidget(),
+      ),
     );
   }
 }
