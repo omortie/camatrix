@@ -1,4 +1,4 @@
-import 'package:camatrix/main.dart';
+import 'package:camatrix/rtsp_state.dart';
 import 'package:flutter/material.dart';
 import 'package:camatrix/camera_view.dart';
 import 'package:provider/provider.dart';

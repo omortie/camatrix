@@ -1,5 +1,5 @@
 import 'package:camatrix/dashboard_page.dart';
-import 'package:camatrix/main.dart';
+import 'package:camatrix/rtsp_state.dart';
 import 'package:camatrix/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
