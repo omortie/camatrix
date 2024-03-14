@@ -17,17 +17,18 @@ class DashboardPage extends StatelessWidget {
             crossAxisSpacing: 2,
             childAspectRatio: 1.8,
             // Define the widget builder for each grid item
-            children: rtsps.rtspList
-                .map((rtsp) => _buildCameraView(rtsp.url))
-                .toList(),
+            children:
+                rtsps.rtspList.map((rtsp) => _buildCameraView(rtsp)).toList(),
           ),
         ),
         floatingActionButton: IconButton(
           onPressed: () {
             rtsps.add(RTSP(
-                "New",
-                "rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern",
-                200));
+              name: "New",
+              url:
+                  "rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern",
+              frameRate: 20,
+            ));
           },
           icon: const Icon(Icons.add),
         ),
@@ -35,10 +36,10 @@ class DashboardPage extends StatelessWidget {
     });
   }
 
-  Widget _buildCameraView(String url) {
+  Widget _buildCameraView(RTSP rtsp) {
     return Container(
       padding: const EdgeInsets.all(6),
-      child: CameraView(rtspURL: url),
+      child: CameraView(rtsp: rtsp),
     );
   }
 }

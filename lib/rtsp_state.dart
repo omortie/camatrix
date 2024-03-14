@@ -3,11 +3,11 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 class RTSP {
-  late final String url;
-  late final String name;
-  late final int frameRate;
+  const RTSP({required this.name, required this.url, required this.frameRate});
 
-  RTSP(this.name, this.url, this.frameRate);
+  final String url;
+  final String name;
+  final int frameRate;
 }
 
 class RTSPModel extends ChangeNotifier {
