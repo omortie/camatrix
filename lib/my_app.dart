@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
       title: "Camatrix",
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
       home: DefaultTabController(
         length: 2,

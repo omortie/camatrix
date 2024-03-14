@@ -33,6 +33,8 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           Text("Dummy Settings"),
           Slider(
+            min: 0.5,
+            max: 2,
             label: "Aspect Ratio",
             value: aspectRatio,
             onChanged: (value) {

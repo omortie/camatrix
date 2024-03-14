@@ -2,13 +2,21 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
+class RTSP {
+  late final String url;
+  late final String name;
+  late final int frameRate;
+
+  RTSP(this.name, this.url, this.frameRate);
+}
+
 class RTSPModel extends ChangeNotifier {
-  final List<String> _rtspList = [];
+  final List<RTSP> _rtspList = [];
 
-  UnmodifiableListView<String> get rtspList => UnmodifiableListView(_rtspList);
+  UnmodifiableListView<RTSP> get rtspList => UnmodifiableListView(_rtspList);
 
-  void add(String rtspUrl) {
-    _rtspList.add(rtspUrl);
+  void add(RTSP newRTSP) {
+    _rtspList.add(newRTSP);
 
     notifyListeners();
   }
