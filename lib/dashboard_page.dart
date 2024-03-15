@@ -6,31 +6,24 @@ import 'package:provider/provider.dart';
 class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<RTSPModel>(builder: (context, rtsps, child) {
+    return Consumer<RTSPState>(builder: (context, rtsps, child) {
       return Scaffold(
         body: Container(
           color: Theme.of(context).colorScheme.primaryContainer,
           child: GridView.builder(
             itemCount: rtsps.rtspList.length,
-            itemBuilder: (context, index) {
-              return _buildCameraView(context, rtsps.rtspList[index]);
-            },
+            itemBuilder: (context, index) =>
+                _buildCameraView(context, rtsps.rtspList[index]),
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 480.0,
               mainAxisSpacing: 2,
               crossAxisSpacing: 2,
             ),
+            padding: EdgeInsets.all(5),
           ),
         ),
         floatingActionButton: IconButton(
-          onPressed: () {
-            rtsps.add(RTSP(
-              name: "New",
-              url:
-                  "rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern",
-              frameRate: 20,
-            ));
-          },
+          onPressed: () => _addRTSPToModel(rtsps),
           icon: const Icon(Icons.add),
         ),
       );
@@ -44,10 +37,24 @@ class DashboardPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(rtsp.name),
-          Flexible(child: CameraView(rtsp: rtsp)),
+          Text(
+            rtsp.name,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          Flexible(
+            child: CameraView(rtsp: rtsp),
+          ),
         ],
       ),
     );
+  }
+
+  void _addRTSPToModel(RTSPState rtsps) {
+    rtsps.add(RTSP(
+      name: "Camera ${rtsps.rtspList.length + 1}",
+      url:
+          "rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern",
+      frameRate: 20,
+    ));
   }
 }

@@ -11,7 +11,7 @@ void main() {
 
     // If successful, run the app
     runApp(ChangeNotifierProvider(
-      create: (context) => RTSPModel(),
+      create: (context) => RTSPState(),
       child: MyApp(),
     ));
   } catch (e) {

@@ -8,9 +8,20 @@ class RTSP {
   final String url;
   final String name;
   final int frameRate;
+
+  RTSP.fromJson(Map<String, dynamic> json)
+      : url = json['url'] as String,
+        name = json['name'] as String,
+        frameRate = json['frameRate'] as int;
+
+  Map<String, dynamic> toJson() => {
+        'url': url,
+        'name': name,
+        'frameRate': frameRate,
+      };
 }
 
-class RTSPModel extends ChangeNotifier {
+class RTSPState extends ChangeNotifier {
   final List<RTSP> _rtspList = [];
 
   UnmodifiableListView<RTSP> get rtspList => UnmodifiableListView(_rtspList);
