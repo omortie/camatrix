@@ -10,15 +10,16 @@ class DashboardPage extends StatelessWidget {
       return Scaffold(
         body: Container(
           color: Theme.of(context).colorScheme.primaryContainer,
-          child: GridView.count(
-            crossAxisCount: 3,
-            // Add spacing between grid items
-            mainAxisSpacing: 2,
-            crossAxisSpacing: 2,
-            childAspectRatio: 1.8,
-            // Define the widget builder for each grid item
-            children:
-                rtsps.rtspList.map((rtsp) => _buildCameraView(rtsp)).toList(),
+          child: GridView.builder(
+            itemCount: rtsps.rtspList.length,
+            itemBuilder: (context, index) {
+              return _buildCameraView(context, rtsps.rtspList[index]);
+            },
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 480.0,
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
+            ),
           ),
         ),
         floatingActionButton: IconButton(
@@ -36,10 +37,17 @@ class DashboardPage extends StatelessWidget {
     });
   }
 
-  Widget _buildCameraView(RTSP rtsp) {
-    return Container(
-      padding: const EdgeInsets.all(6),
-      child: CameraView(rtsp: rtsp),
+  Widget _buildCameraView(BuildContext context, RTSP rtsp) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(rtsp.name),
+          Flexible(child: CameraView(rtsp: rtsp)),
+        ],
+      ),
     );
   }
 }
