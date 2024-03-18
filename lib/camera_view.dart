@@ -51,12 +51,8 @@ class CameraViewState extends State<CameraView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-      child: Video(
-        controller: controller,
-      ),
+    return Video(
+      controller: controller,
     );
   }
 }
