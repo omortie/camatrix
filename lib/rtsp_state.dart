@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class RTSP {
@@ -13,13 +12,13 @@ class RTSP {
   factory RTSP.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
-        'title': String name,
-        'userId': int frameRate,
+        'name': String name,
+        'url': String url,
+        'frameRate': int frameRate,
       } =>
         RTSP(
           name: name,
-          url:
-              'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+          url: url,
           frameRate: frameRate,
         ),
       _ => throw const FormatException('failed to load rtsp'),
@@ -48,20 +47,5 @@ class RTSPState extends ChangeNotifier {
     _rtspList.clear();
 
     notifyListeners();
-  }
-
-  Future<void> fetchRTSP() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      add(RTSP.fromJson(jsonDecode(response.body) as Map<String, dynamic>));
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load rtsp');
-    }
   }
 }

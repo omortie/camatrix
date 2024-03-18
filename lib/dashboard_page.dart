@@ -9,25 +9,19 @@ class DashboardPage extends StatelessWidget {
     return Consumer<RTSPState>(builder: (context, rtsps, child) {
       return Scaffold(
         body: Container(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child: rtsps.rtspList.isNotEmpty
-                ? GridView.builder(
-                    itemCount: rtsps.rtspList.length,
-                    itemBuilder: (context, index) =>
-                        _buildCameraView(context, rtsps.rtspList[index]),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 480.0,
-                      mainAxisSpacing: 2,
-                      crossAxisSpacing: 2,
-                    ),
-                    padding: EdgeInsets.all(5),
-                  )
-                : Center(
-                    child: TextButton(
-                      onPressed: () => _fetchRTSPFromNet(rtsps),
-                      child: Text("Fetch RTSPs"),
-                    ),
-                  )),
+          color: Theme.of(context).colorScheme.primaryContainer,
+          child: GridView.builder(
+            itemCount: rtsps.rtspList.length,
+            itemBuilder: (context, index) =>
+                _buildCameraView(context, rtsps.rtspList[index]),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 480.0,
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
+            ),
+            padding: EdgeInsets.all(5),
+          ),
+        ),
         floatingActionButton: IconButton(
           onPressed: () => _addRTSPToModel(rtsps),
           icon: const Icon(Icons.add),
@@ -62,9 +56,5 @@ class DashboardPage extends StatelessWidget {
           "rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern",
       frameRate: 20,
     ));
-  }
-
-  void _fetchRTSPFromNet(RTSPState rtsps) {
-    rtsps.fetchRTSP();
   }
 }

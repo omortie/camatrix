@@ -1,8 +1,21 @@
-import 'package:camatrix/my_app.dart';
-import 'package:camatrix/rtsp_state.dart';
+import 'package:camatrix/camatrix.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:provider/provider.dart';
+
+const mockRTSPData = [
+  {
+    'name': 'Camera 1',
+    'url':
+        'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+    'framerate': 20,
+  },
+  {
+    'name': 'Camera 2',
+    'url':
+        'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+    'framerate': 20,
+  },
+];
 
 void main() {
   try {
@@ -10,10 +23,7 @@ void main() {
     MediaKit.ensureInitialized();
 
     // If successful, run the app
-    runApp(ChangeNotifierProvider(
-      create: (context) => RTSPState(),
-      child: MyApp(),
-    ));
+    runApp(Camatrix(rtspData: mockRTSPData));
   } catch (e) {
     // Catch any errors during initialization
     // Handle the error appropriately, e.g., log it or display a user-friendly message

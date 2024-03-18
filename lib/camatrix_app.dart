@@ -1,7 +1,7 @@
 import 'package:camatrix/home_widget.dart';
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
+class CamatrixApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

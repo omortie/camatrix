@@ -1,11 +1,8 @@
 import 'package:camatrix/dashboard_page.dart';
-import 'package:camatrix/rtsp_state.dart';
 import 'package:camatrix/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidget extends StatelessWidget {
-  void addRTSP(RTSP newRTSP) {}
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
