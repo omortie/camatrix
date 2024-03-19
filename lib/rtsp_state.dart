@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 class RTSP {
-  const RTSP({required this.name, required this.url, required this.frameRate});
+  const RTSP({required this.name, required this.url, this.frameRate = 20});
 
   final String url;
   final String name;
@@ -20,7 +20,7 @@ class RTSP {
           url: url,
           frameRate: frameRate,
         ),
-      _ => throw const FormatException('failed to load rtsp'),
+      _ => throw const FormatException('Failed to load rtsp.'),
     };
   }
 
@@ -33,6 +33,13 @@ class RTSP {
 
 class RTSPState extends ChangeNotifier {
   final List<RTSP> _rtspList = [];
+  final List<Map<String, dynamic>> rtspData;
+
+  RTSPState({this.rtspData = const []}) {
+    for (final rtsp in rtspData) {
+      add(RTSP.fromJson(rtsp));
+    }
+  }
 
   UnmodifiableListView<RTSP> get rtspList => UnmodifiableListView(_rtspList);
 
