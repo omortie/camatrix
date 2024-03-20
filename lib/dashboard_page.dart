@@ -22,10 +22,6 @@ class DashboardPage extends StatelessWidget {
             padding: EdgeInsets.all(5),
           ),
         ),
-        floatingActionButton: IconButton(
-          onPressed: () => _addRTSPToModel(rtsps),
-          icon: const Icon(Icons.add),
-        ),
       );
     });
   }
@@ -47,14 +43,5 @@ class DashboardPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _addRTSPToModel(RTSPState rtsps) {
-    rtsps.add(RTSP(
-      name: "Camera ${rtsps.rtspList.length + 1}",
-      url:
-          "rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern",
-      frameRate: 20,
-    ));
   }
 }

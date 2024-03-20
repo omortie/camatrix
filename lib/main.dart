@@ -10,8 +10,7 @@ const mockRTSPData = [
   },
   {
     'name': 'Camera 2',
-    'url':
-        'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+    'url': 'rtsp://admin:tzv12345@46.210.85.157:10554',
     'frameRate': 20,
   },
 ];
