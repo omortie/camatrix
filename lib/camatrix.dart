@@ -21,8 +21,12 @@ class _CamatrixState extends State<Camatrix> {
   void initState() {
     super.initState();
 
-    // Attempt MediaKit initialization
-    MediaKit.ensureInitialized();
+    try {
+      // Attempt MediaKit initialization
+      MediaKit.ensureInitialized();
+    } catch (e) {
+      debugPrint("Error initializing MediaKit: $e");
+    }
   }
 
   @override

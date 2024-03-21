@@ -4,25 +4,46 @@ import 'package:flutter/material.dart';
 const mockRTSPData = [
   {
     'name': 'Camera 1',
-    'url':
-        'rtsp://rtspstream:a349b013a371642450e3ace0d41b7a9a@zephyr.rtsp.stream/pattern',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
     'frameRate': 20,
   },
   {
     'name': 'Camera 2',
-    'url': 'rtsp://admin:tzv12345@46.210.85.157:10554',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+    'frameRate': 20,
+  },
+  {
+    'name': 'Camera 3',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+    'frameRate': 20,
+  },
+  {
+    'name': 'Camera 4',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+    'frameRate': 20,
+  },
+  {
+    'name': 'Camera 5',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+    'frameRate': 20,
+  },
+  {
+    'name': 'Camera 6',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+    'frameRate': 20,
+  },
+  {
+    'name': 'Camera 7',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+    'frameRate': 20,
+  },
+  {
+    'name': 'Camera 8',
+    'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
     'frameRate': 20,
   },
 ];
 
 void main() {
-  try {
-    // If successful, run the app
-    runApp(Camatrix(rtspData: mockRTSPData));
-  } catch (e) {
-    // Catch any errors during initialization
-    // Handle the error appropriately, e.g., log it or display a user-friendly message
-    debugPrint("Error initializing MediaKit: $e");
-    // You might choose to display an error message or exit the app here
-  }
+  runApp(Camatrix(rtspData: mockRTSPData));
 }
