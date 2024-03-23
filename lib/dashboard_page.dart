@@ -23,6 +23,14 @@ class DashboardPage extends StatelessWidget {
             padding: EdgeInsets.all(5),
           ),
         ),
+        floatingActionButton: IconButton(
+          onPressed: () => rtsps.add(
+            RTSP(
+                name: 'Test Camera',
+                url: 'rtsp://admin:camteam524@31.154.52.236:10500'),
+          ),
+          icon: Icon(Icons.add),
+        ),
       );
     });
   }
