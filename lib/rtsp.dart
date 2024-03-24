@@ -3,7 +3,11 @@ part 'rtsp.g.dart';
 
 @JsonSerializable()
 class RTSP {
-  const RTSP({required this.name, required this.url, this.frameRate = 20});
+  const RTSP({
+    required this.name,
+    required this.url,
+    this.frameRate = 20,
+  });
 
   final String url;
   final String name;

@@ -19,8 +19,6 @@ const mockRTSPData = [
 
 void main(List<String> args) {
   if (args.firstOrNull == 'multi_window') {
-    final windowId = int.parse(args[1]);
-
     runApp(Camatrix());
   } else {
     // runApp(Camatrix(rtspData: mockRTSPData));
@@ -43,40 +41,101 @@ class _MyAppState extends State<MyApp> {
       home: Container(
         color: Colors.cyan,
         child: Center(
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () async {
-                    final window = await DesktopMultiWindow.createWindow(
-                        jsonEncode(mockRTSPData));
-                    window
-                      ..center()
-                      ..setTitle('Camatrix')
-                      ..show();
-                    setState(() {
-                      slaveWindowId = window.windowId;
-                    });
-                  },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Card(
+                child: TextButton(
+                  onPressed: openCamatrix,
                   child: const Text("Open Camatrix"),
                 ),
-                TextButton(
-                  onPressed: () => addRTSPToCamatrix(),
-                  child: const Text("Add RTSP"),
-                )
-              ],
-            ),
+              ),
+              Card(
+                child: TextButton(
+                  onPressed: setRTSPInCamatrix,
+                  child: const Text("Set RTSP List (Initialize)"),
+                ),
+              ),
+              Card(
+                child: TextButton(
+                  onPressed: addRTSPToCamatrix,
+                  child: const Text("Add RTSP (Camera 3)"),
+                ),
+              ),
+              Card(
+                child: TextButton(
+                  onPressed: removeRTSPFromCamatrix,
+                  child: const Text("Remove RTSP (Camera 2)"),
+                ),
+              ),
+              Card(
+                child: TextButton(
+                  onPressed: updateRTSPInCamatrix,
+                  child: const Text("Update RTSP (Camera 1)"),
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
   }
 
+  void openCamatrix() async {
+    final window =
+        await DesktopMultiWindow.createWindow(jsonEncode(mockRTSPData));
+    window
+      ..center()
+      ..setTitle('Camatrix')
+      ..show();
+    setState(() {
+      slaveWindowId = window.windowId;
+    });
+    debugPrint("Camatrix window id: $slaveWindowId");
+  }
+
+  void setRTSPInCamatrix() async {
+    final result = await DesktopMultiWindow.invokeMethod(
+      slaveWindowId,
+      "setRTSP",
+      jsonEncode(mockRTSPData),
+    );
+    debugPrint("result initialize set RTSP: $result");
+  }
+
   void addRTSPToCamatrix() async {
     final result = await DesktopMultiWindow.invokeMethod(
-        slaveWindowId, "setRTSP", jsonEncode(mockRTSPData));
-    debugPrint("result: $result");
+      slaveWindowId,
+      "addRTSP",
+      jsonEncode({
+        'name': 'Camera 3',
+        'url': 'rtsp://admin:camteam524@31.154.52.236:10500',
+        'frameRate': 20,
+      }),
+    );
+    debugPrint("result adding RTSP: $result");
+  }
+
+  void removeRTSPFromCamatrix() async {
+    final result = await DesktopMultiWindow.invokeMethod(
+      slaveWindowId,
+      "removeRTSP",
+      jsonEncode({"name": "Camera 2"}),
+    );
+    debugPrint("result removing RTSP: $result");
+  }
+
+  void updateRTSPInCamatrix() async {
+    final result = await DesktopMultiWindow.invokeMethod(
+      slaveWindowId,
+      "updateRTSP",
+      jsonEncode({
+        "name": "Camera 1",
+        "url":
+            "rtsp://rtspstream:96d01209a52bb876d5c33853d6431f21@zephyr.rtsp.stream/movie",
+        "frameRate": 30,
+      }),
+    );
+    debugPrint("result updating RTSP: $result");
   }
 }
