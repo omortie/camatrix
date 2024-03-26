@@ -50,8 +50,15 @@ class _CamatrixAppState extends State<CamatrixApp> {
 
     if (call.method == "setRTSP") {
       try {
-        await Future.microtask(() =>
-            context.read<RTSPState>().setRTSPListFromDynamic(call.arguments));
+        // Decode JSON safely using jsonDecode() and
+        // Map each element to a Map<String, dynamic>, ensuring it's a Map
+        final rtspReceived = jsonDecode(call.arguments)
+            .map((e) => e is Map<String, dynamic> ? e : null)
+            .whereType<Map<String, dynamic>>()
+            .toList();
+
+        await Future.microtask(
+            () => context.read<RTSPState>().setRTSPList(rtspReceived));
         return "Done setRTSP";
       } catch (error) {
         return "Couldn't set RTSP list since $error";
@@ -59,10 +66,9 @@ class _CamatrixAppState extends State<CamatrixApp> {
     }
 
     if (call.method == "removeRTSP") {
-      final String name = jsonDecode(call.arguments)['name'];
-      if (name.isNotEmpty) {
-        await Future.microtask(
-            () => context.read<RTSPState>().removeByName(name));
+      final String url = jsonDecode(call.arguments)['url'];
+      if (url.isNotEmpty) {
+        await Future.microtask(() => context.read<RTSPState>().removeRTSP(url));
         return "Done removeRTSP";
       } else {
         return "Name should be specified";
