@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:camatrix/camatrix.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 
@@ -18,20 +17,12 @@ const mockRTSPData = [
   },
 ];
 
-void main(List<String> args) {
-  if (args.firstOrNull == 'multi_window') {
-    runApp(Camatrix());
-  } else {
-    runApp(MyApp());
-  }
-}
-
-class MyApp extends StatefulWidget {
+class CamatrixController extends StatefulWidget {
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<CamatrixController> createState() => _CamatrixControllerState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _CamatrixControllerState extends State<CamatrixController> {
   late int slaveWindowId = -1;
 
   @override
