@@ -32,7 +32,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late int slaveWindowId;
+  late int slaveWindowId = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +95,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setRTSPInCamatrix() async {
+    if (slaveWindowId == -1) {
+      return;
+    }
+
     final result = await DesktopMultiWindow.invokeMethod(
       slaveWindowId,
       "setRTSP",
@@ -104,6 +108,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void addRTSPToCamatrix() async {
+    if (slaveWindowId == -1) {
+      return;
+    }
+
     final result = await DesktopMultiWindow.invokeMethod(
       slaveWindowId,
       "addRTSP",
@@ -117,6 +125,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void removeRTSPFromCamatrix() async {
+    if (slaveWindowId == -1) {
+      return;
+    }
+
     final result = await DesktopMultiWindow.invokeMethod(
       slaveWindowId,
       "removeRTSP",
@@ -126,6 +138,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void updateRTSPInCamatrix() async {
+    if (slaveWindowId == -1) {
+      return;
+    }
+
     final result = await DesktopMultiWindow.invokeMethod(
       slaveWindowId,
       "updateRTSP",
