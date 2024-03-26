@@ -18,6 +18,8 @@ const mockRTSPData = [
 ];
 
 class CamatrixController extends StatefulWidget {
+  const CamatrixController({super.key});
+
   @override
   State<CamatrixController> createState() => _CamatrixControllerState();
 }
