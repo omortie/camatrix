@@ -22,7 +22,7 @@ class CameraViewState extends State<CameraView> {
     ),
   );
 
-  late Media playable = Media(widget.rtsp.url);
+  late final Media playable = Media(widget.rtsp.url);
 
   // Create a [VideoController] to handle video output from [Player].
   late final controller = VideoController(player);
@@ -35,7 +35,7 @@ class CameraViewState extends State<CameraView> {
     // Play a [Media] or [Playlist].
     player.open(
       playable,
-      // play: false,
+      play: false,
     );
 
     player.stream.error.listen((event) {
@@ -51,12 +51,6 @@ class CameraViewState extends State<CameraView> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.rtsp.url != playable.uri) {
-      setState(() {
-        playable = Media(widget.rtsp.url);
-      });
-      player.open(playable);
-    }
     return Video(
       controller: controller,
     );

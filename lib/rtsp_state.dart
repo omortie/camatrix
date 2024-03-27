@@ -73,7 +73,7 @@ class RTSPState extends ChangeNotifier {
       notifyListeners();
     } else {
       throw NoSuchElementException(
-          "RTSP specified with url ${updatedRTSP.name} doesn't exist");
+          "RTSP specified with url ${updatedRTSP.url} doesn't exist");
     }
   }
 }

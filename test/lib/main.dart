@@ -7,6 +7,6 @@ void main(List<String> args) {
   if (args.firstOrNull == 'multi_window') {
     runApp(const Camatrix());
   } else {
-    runApp(CamatrixController());
+    runApp(const CamatrixController());
   }
 }
