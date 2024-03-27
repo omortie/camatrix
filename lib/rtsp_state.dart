@@ -25,15 +25,15 @@ class RTSPState extends ChangeNotifier {
   final Map<String, RTSP> _rtspMap = {};
   final logger = Logger();
 
-  RTSPState({List<Map<String, dynamic>> rtspData = const []}) {
-    setRTSPList(rtspData);
+  RTSPState({List<RTSP> initialRTSPState = const []}) {
+    setRTSPList(initialRTSPState);
   }
 
-  void setRTSPList(List<Map<String, dynamic>> rtspData) {
+  void setRTSPList(List<RTSP> rtspData) {
     removeAll();
 
-    for (final rtsp in rtspData) {
-      add(RTSP.fromJson(rtsp));
+    for (RTSP rtsp in rtspData) {
+      add(rtsp);
     }
   }
 

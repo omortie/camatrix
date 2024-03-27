@@ -1,14 +1,15 @@
 import 'package:camatrix/camatrix_app.dart';
+import 'package:camatrix/rtsp.dart';
 import 'package:camatrix/rtsp_state.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 
 class Camatrix extends StatefulWidget {
-  final List<Map<String, dynamic>> rtspData;
+  final List<RTSP> initialRTSPState;
 
   const Camatrix({
-    this.rtspData = const [],
+    this.initialRTSPState = const [],
     super.key,
   });
 
@@ -32,7 +33,7 @@ class _CamatrixState extends State<Camatrix> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => RTSPState(rtspData: widget.rtspData),
+      create: (context) => RTSPState(initialRTSPState: widget.initialRTSPState),
       child: CamatrixApp(),
     );
   }
